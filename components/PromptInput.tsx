@@ -1,9 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import useSWR from "swr";
 
 function PromptInput() {
   const [input, setInput] = useState("");
+  const {data: suggestion, isLoading, mutate, isValidating} = useSWR('/api/suggestion', fetchSuggestionFromChatGPT, {revalidateOnFOcus: false,} );
+
   return (
     <div className="m-10">
       <form className="flex flex-col lg:flex-row shadow-md shadow-slate-400/10 border rounded-md lg:divide-x ">
@@ -33,7 +36,7 @@ function PromptInput() {
         </button>
         <button
           type="button"
-          lassName="p-4 bg-white text-green-400 border-none transition-colors duration-200 rounded-b-md md:rounded-r-md md:rounded-bl-none font-bold disabled:text-gray-300 disabled:cursor-not-allowed disabled:bg-gray-400"
+          className="p-4 bg-white text-green-400 border-none transition-colors duration-200 rounded-b-md md:rounded-r-md md:rounded-bl-none font-bold disabled:text-gray-300 disabled:cursor-not-allowed disabled:bg-gray-400"
         >
           New Suggestion
         </button>

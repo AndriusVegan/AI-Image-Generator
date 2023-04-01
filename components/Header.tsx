@@ -26,7 +26,7 @@ function Header() {
           Join Vegan community
         </Link>
         <Link
-          href="https://github.com/AndriusVegan/chatGPT-bot"
+          href="https://github.com/AndriusVegan/AI-Image-Generator"
           className="px-2 font-light"
         >
           GitHub Repo

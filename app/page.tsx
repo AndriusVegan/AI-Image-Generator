@@ -4,5 +4,5 @@
 
 // import "../styles/global.css";
 export default function Home() {
-  return <h1 className="text-green-800">GO vegan </h1>;
+  return <h1 className="text-green-800"> </h1>;
 }
