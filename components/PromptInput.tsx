@@ -10,11 +10,14 @@ function PromptInput() {
     data: suggestion,
     isLoading,
     mutate,
+    // generates new suggestion
     isValidating,
   } = useSWR("/api/suggestion", fetchSuggestionFromChatGPT, {
-    revalidateOnFOcus: false,
+    revalidateOnFocus: false,
   });
   // pulls data from our own local API
+  // console.log(suggestion);
+  const loading = isLoading || isValidating;
 
   return (
     <div className="m-10">
@@ -22,6 +25,11 @@ function PromptInput() {
         <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          placeholder={
+            (loading && "ChatGPT is thinking of a suggestion...") ||
+            suggestion ||
+            "Enter a prompt.."
+          }
           className="flex-1 outline-none rounded-md"
         />
 
@@ -46,10 +54,20 @@ function PromptInput() {
         <button
           type="button"
           className="p-4 bg-white text-green-400 border-none transition-colors duration-200 rounded-b-md md:rounded-r-md md:rounded-bl-none font-bold disabled:text-gray-300 disabled:cursor-not-allowed disabled:bg-gray-400"
+          onClick={mutate}
         >
           New Suggestion
         </button>
       </form>
+
+      {input && (
+        <p className="italic pt-2 pl-2 font-light">
+          Suggestion:{""}
+          <span className="test-violet-500">
+            {loading ? "ChatGPT is thinking..." : suggestion}
+          </span>
+        </p>
+      )}
     </div>
   );
 }
